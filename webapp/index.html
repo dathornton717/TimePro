@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>D3 Page Template</title>
+    <link rel="stylesheet" href="graphs.css">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <script src="chosen.jquery.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script>
+         $(function() {
+            $("#datepicker-1").datepicker();
+         });
+         $(function() {
+            $("#datepicker-2").datepicker();
+         });
+      </script>
+</head>
+
+<body>
+<div class="selectors">
+    <p style="display: inline-block;">Start Date: <input type = "text" id = "datepicker-1"></p>
+    <p style="display: inline-block;">End Date: <input type = "text" id = "datepicker-2"></p>
+</div>
+<svg width="1200" height="600"></svg>
+<script src="graphs.js"></script>
+</body>
+
+</html>
