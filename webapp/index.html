@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>D3 Page Template</title>
-    <link rel="stylesheet" href="graphs.css">
+    <link rel="stylesheet" href="graphs.css" />
     <script src="jquery-3.2.1.min.js"></script>
     <script src="jquery-ui.js"></script>
     <script src="chosen.jquery.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="updateSwimmers.js"></script>
     <script>
          $(function() {
             $("#datepicker-1").datepicker();
@@ -20,9 +21,17 @@
 
 <body>
 <div class="selectors">
-    <p style="display: inline-block;">Start Date: <input type = "text" id = "datepicker-1"></p>
-    <p style="display: inline-block;">End Date: <input type = "text" id = "datepicker-2"></p>
+    <p style="display: inline-block; margin: 5px">Start Date: <input type = "text" id = "datepicker-1"></p>
+    <p style="display: inline-block; margin: 5px">End Date: <input type = "text" id = "datepicker-2"></p>
+    <form class="add-swimmer">
+        <input type="button" value="Add Swimmer(s)" onclick="window.location.href='addswimmer.html'" />
+    </form>
+    <form class="update-swimmer">
+        <input type="button" value="Update All Swimmers' Times" onclick="updateSwimmers();"/>
+    </form>
 </div>
+
+
 <svg width="1200" height="600"></svg>
 <script src="graphs.js"></script>
 </body>

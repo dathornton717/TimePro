@@ -1,4 +1,12 @@
+.add-swimmer {
+    display: inline-block;
+    margin: 10px;
+}
 
+.update-swimmer {
+    display: inline-block;
+    margin: 10px;
+}
 
 /* @group Base */
 .chosen-container {

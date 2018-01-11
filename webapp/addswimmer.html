@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="addswimmer.css" />
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="addSwimmers.js"></script>
+</head>
+<body>
+
+<h1>Add Swimmer(s)</h1>
+<h3>Add Individual Swimmer</h3>
+<p>Insert the following information about the swimmmer.</p>
+
+<form onsubmit="return addIndividualSwimmer();">
+    <label for="name">Swimmer Name</label>
+    <input type="text" id="name" value=""><br>
+    <label for="team-name">Team Name</label>
+    <input type="text" id="team-name" value=""><br>
+    <input type="submit" value="Submit">
+</form>
+
+<h3>Add Multiple Swimmers</h3>
+<p>Upload a file containing swimmer information.</p>
+<a href="format.html">Format of the file</a>
+<form onsubmit="return addMultipleSwimmers();">
+    <input type="file" id="file" value=""><br>
+    <input type="submit" value="Submit">
+</form>
+<a href="index.html">Return to Graph View</a>
+
+</body>
+</html>

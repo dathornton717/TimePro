@@ -25,6 +25,31 @@ public class GetResource {
     public GetResource() {}
 
     @GET
+    @Path("update-times")
+    public Response updateTimes()
+    throws Exception {
+        Factory factory = new Factory();
+        Map<String, List<String>> swimmers = factory.getAllNames();
+        JsonNodeFactory jsonNodeFactory = JsonNodeFactory.instance;
+
+        for (String team : swimmers.keySet()) {
+            ObjectNode json = jsonNodeFactory.objectNode();
+            json.put("teamName", team);
+            List<String> names = swimmers.get(team);
+            for (String name : names) {
+                int spaceIndex = name.indexOf(' ');
+                String firstName = name.substring(0, spaceIndex);
+                String lastName = name.substring(spaceIndex + 1);
+                json.put("firstName", firstName);
+                json.put("lastName", lastName);
+                new PutResource().addSwimmer(json.toString());
+            }
+        }
+
+        return Response.ok().build();
+    }
+
+    @GET
     @Path("times-by-name/{firstName}/{lastName}/{event}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTimesByName(
@@ -112,8 +137,8 @@ public class GetResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllNames()
     throws Exception {
-        List<String> names = new Factory().getAllNames();
-        ArrayNode result = constructJsonArrayFromList(names);
+        Map<String, List<String>> names = new Factory().getAllNames();
+        ArrayNode result = constructJsonArrayFromNameMap(names);
         return Response.ok().entity(result.toString()).build();
     }
 
@@ -130,11 +155,14 @@ public class GetResource {
         return result;
     }
 
-    private ArrayNode constructJsonArrayFromList(List<String> list) {
+    private ArrayNode constructJsonArrayFromNameMap(Map<String, List<String>> map) {
         JsonNodeFactory factory = JsonNodeFactory.instance;
         ArrayNode result = factory.arrayNode();
-        for (String name : list) {
-            result.add(name);
+        for (String team : map.keySet()) {
+            List<String> names = map.get(team);
+            for (String name : names) {
+                result.add(name);
+            }
         }
 
         return result;

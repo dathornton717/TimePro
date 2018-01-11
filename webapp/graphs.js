@@ -65,7 +65,7 @@ function updateGraph(event, params) {
         var name = names[i];
         var firstName = name.split(", ")[1];
         var lastName = name.split(", ")[0];
-        var url = "http://localhost:8080/rest/times-between-dates-name/" +
+        var url = "http://localhost:8080/TimePro/rest/times-between-dates-name/" +
             firstName + "/" +
             lastName + "/" +
             event + "/" +
@@ -272,7 +272,7 @@ function setUpNameSelector(data) {
     }
     $html += '</select>';
 
-    $('.selectors').append($html);
+    $('.add-swimmer').before($html);
     $('.chosenElement').chosen({ width: "210px" });
     $('.html-multi-chosen-select').chosen({ width: "210px" });
     $('.simple-select').chosen({ width: "210px" });
@@ -327,7 +327,7 @@ $("#datepicker-2").datepicker({
 
 $.ajax({
     type: "GET",
-    url:"http://localhost:8080/rest/names",
+    url:"http://localhost:8080/TimePro/rest/names",
     dateType: "json",
     success: setUpNameSelector
 }).done(function() {

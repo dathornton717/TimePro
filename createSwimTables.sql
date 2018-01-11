@@ -1,7 +1,8 @@
-create table id_to_name (first_name varchar(255), last_name varchar(255), id varchar(36));
+create table id_to_name (first_name varchar(255), last_name varchar(255), id varchar(36), team_name varchar(255));
 create unique index idx_id_to_name_id_index on id_to_name (id);
 create index idx_id_to_name_names on id_to_name (first_name, last_name);
 create index idx_id_to_name_last_name on id_to_name (last_name);
+create index idx_id_to_name_team_name on id_to_name (team_name);
 
 create table 50_free (id varchar(36), date_swam bigint, time_swam int);
 create index idx_50_free_id on 50_free (id);
