@@ -373,7 +373,7 @@ public class PutResource {
             PreparedStatement statement = null;
             String id = UUID.randomUUID().toString();
             try {
-                connection = DataSource.getInstance().getConnection();
+                connection = DataSource.getDatabaseConnection();
                 statement = connection.prepareStatement(
                     "insert into id_to_name" +
                     "(first_name, last_name, id, team_name) " +
@@ -401,7 +401,7 @@ public class PutResource {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select id from id_to_name " +
                 "where first_name = ? " +

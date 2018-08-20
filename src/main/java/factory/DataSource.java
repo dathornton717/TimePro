@@ -1,9 +1,5 @@
 package factory;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-
-import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,30 +13,10 @@ public class DataSource {
         return DriverManager.getConnection(url);
     }
 
-    private static DataSource dataSource;
-    private ComboPooledDataSource comboPooledDataSource;
-
-    private DataSource()
-    throws IOException, SQLException, PropertyVetoException {
-        comboPooledDataSource = new ComboPooledDataSource();
-        comboPooledDataSource.setDriverClass("com.mysql.jdbc.Driver");
-        comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/time_pro");
-        comboPooledDataSource.setUser("admin");
-        comboPooledDataSource.setPassword("admin");
+    public static Connection getDatabaseConnection() throws ClassNotFoundException, SQLException {
+        String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+        Class.forName(driver);
+        String url = "jdbc:derby:time_pro;";
+        return DriverManager.getConnection(url);
     }
-
-    public static DataSource getInstance()
-    throws IOException, SQLException, PropertyVetoException {
-        if (dataSource == null) {
-            dataSource = new DataSource();
-        }
-        return dataSource;
-    }
-
-    public Connection getConnection()
-    throws SQLException {
-        return comboPooledDataSource.getConnection();
-    }
-
-
 }

@@ -20,7 +20,7 @@ public class Factory {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select b.date_swam, b.time_swam " +
                     "from " + event.eventToTable() + " b " +
@@ -69,7 +69,7 @@ public class Factory {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select b.date_swam, b.time_swam " +
                     "from " + event.eventToTable() + " b " +
@@ -117,7 +117,7 @@ public class Factory {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select b.date_swam, b.time_swam " +
                     "from " + event.eventToTable() + " b " +
@@ -194,7 +194,7 @@ public class Factory {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select b.date_swam, b.time_swam " +
                 "from " + event.eventToTable() + " b " +
@@ -236,7 +236,7 @@ public class Factory {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select team_name, first_name, last_name " +
                 "from id_to_name"
@@ -281,7 +281,7 @@ public class Factory {
                 Long date = tuple.getSecond();
                 if (!isTimeInDatabase(id, event, time, date)) {
                     try {
-                        connection = DataSource.getInstance().getConnection();
+                        connection = DataSource.getDatabaseConnection();
                         statement = connection.prepareStatement(
                             "insert into " + eventToTable(event) +
                                 "(id, date_swam, time_swam) " +
@@ -306,7 +306,7 @@ public class Factory {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = DataSource.getDatabaseConnection();
             statement = connection.prepareStatement(
                 "select count(*) " +
                     "from " + eventToTable(event) +
@@ -333,41 +333,41 @@ public class Factory {
     private String eventToTable(String event) {
         switch (event) {
             case "50 FR":
-                return "50_free";
+                return "free_50";
             case "100 FR":
-                return "100_free";
+                return "free_100";
             case "200 FR":
-                return "200_free";
+                return "free_200";
             case "500 FR":
-                return "500_free";
+                return "free_500";
             case "1000 FR":
-                return "1000_free";
+                return "free_1000";
             case "1650 FR":
-                return "1650_free";
+                return "free_1650";
             case "50 BK":
-                return "50_back";
+                return "back_50";
             case "100 BK":
-                return "100_back";
+                return "back_100";
             case "200 BK":
-                return "200_back";
+                return "back_200";
             case "50 BR":
-                return "50_breast";
+                return "breast_50";
             case "100 BR":
-                return "100_breast";
+                return "breast_100";
             case "200 BR":
-                return "200_breast";
+                return "breast_200";
             case "50 FL":
-                return "50_fly";
+                return "fly_50";
             case "100 FL":
-                return "100_fly";
+                return "fly_100";
             case "200 FL":
-                return "200_fly";
+                return "fly_200";
             case "100 IM":
-                return "100_im";
+                return "im_100";
             case "200 IM":
-                return "200_im";
+                return "im_200";
             case "400 IM":
-                return "400_im";
+                return "im_400";
             default:
                 throw new IllegalArgumentException("Unknown event");
         }

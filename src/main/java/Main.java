@@ -12,7 +12,10 @@ public class Main {
     public static final Optional<String> port = Optional.ofNullable(System.getenv("PORT"));
 
     public static void main(String[] args) throws Exception {
-        setUpDatabase();
+        // We assume if the directory exists then the user has the database created already
+        if (!(new File("time_pro").exists())) {
+            setUpDatabase();
+        }
 
         String docBase = "src/main/webapp/";
         Tomcat tomcat = new Tomcat();
