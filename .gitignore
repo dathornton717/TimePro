@@ -2,3 +2,5 @@ target/
 .idea/
 out/
 node_modules/
+derby.log
+time_pro/
