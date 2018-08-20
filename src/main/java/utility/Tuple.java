@@ -1,4 +1,4 @@
-package main.java.utility;
+package utility;
 
 public class Tuple<X, Y> {
     private X x;

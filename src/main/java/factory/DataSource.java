@@ -1,4 +1,4 @@
-package main.java.factory;
+package factory;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 

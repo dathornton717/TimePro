@@ -1,6 +1,6 @@
-package main.java.utility;
+package utility;
 
-import main.java.event.Event;
+import event.Event;
 
 public class Utilities {
 
