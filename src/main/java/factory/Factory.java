@@ -1,7 +1,7 @@
-package main.java.factory;
+package factory;
 
-import main.java.event.Event;
-import main.java.utility.Tuple;
+import event.Event;
+import utility.Tuple;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

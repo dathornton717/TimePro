@@ -1,12 +1,12 @@
-package main.java.rest;
+package rest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import main.java.factory.DataSource;
-import main.java.factory.Factory;
-import main.java.utility.Tuple;
+import factory.DataSource;
+import factory.Factory;
+import utility.Tuple;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;

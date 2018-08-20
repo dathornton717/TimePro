@@ -1,4 +1,4 @@
-package main.java.event;
+package event;
 
 public enum Event {
     FIFTY_FREE, HUNDRED_FREE, TWO_HUNDRED_FREE, FIVE_HUNDRED_FREE, THOUSAND_FREE, SIXTEEN_FIFTY_FREE,

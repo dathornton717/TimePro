@@ -1,11 +1,11 @@
-package main.java.rest;
+package rest;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import main.java.event.Event;
-import main.java.factory.Factory;
-import main.java.utility.Utilities;
+import event.Event;
+import factory.Factory;
+import utility.Utilities;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
