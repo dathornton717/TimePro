@@ -2,6 +2,7 @@ package factory;
 
 import event.Event;
 import utility.Tuple;
+import utility.Utilities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -331,45 +332,6 @@ public class Factory {
     }
 
     private String eventToTable(String event) {
-        switch (event) {
-            case "50 FR":
-                return "free_50";
-            case "100 FR":
-                return "free_100";
-            case "200 FR":
-                return "free_200";
-            case "500 FR":
-                return "free_500";
-            case "1000 FR":
-                return "free_1000";
-            case "1650 FR":
-                return "free_1650";
-            case "50 BK":
-                return "back_50";
-            case "100 BK":
-                return "back_100";
-            case "200 BK":
-                return "back_200";
-            case "50 BR":
-                return "breast_50";
-            case "100 BR":
-                return "breast_100";
-            case "200 BR":
-                return "breast_200";
-            case "50 FL":
-                return "fly_50";
-            case "100 FL":
-                return "fly_100";
-            case "200 FL":
-                return "fly_200";
-            case "100 IM":
-                return "im_100";
-            case "200 IM":
-                return "im_200";
-            case "400 IM":
-                return "im_400";
-            default:
-                throw new IllegalArgumentException("Unknown event");
-        }
+        return Utilities.stringToEvent(event).eventToTable();
     }
 }

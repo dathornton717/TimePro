@@ -1,5 +1,9 @@
 package event;
 
+import factory.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public enum Event {
     FIFTY_FREE, HUNDRED_FREE, TWO_HUNDRED_FREE, FIVE_HUNDRED_FREE, THOUSAND_FREE, SIXTEEN_FIFTY_FREE,
     FIFTY_BACK, HUNDRED_BACK, TWO_HUNDRED_BACK,
@@ -10,41 +14,41 @@ public enum Event {
     public String eventToTable() {
         switch (this) {
             case FIFTY_FREE:
-                return "50_free";
+                return "free_50";
             case HUNDRED_FREE:
-                return "100_free";
+                return "free_100";
             case TWO_HUNDRED_FREE:
-                return "200_free";
+                return "free_200";
             case FIVE_HUNDRED_FREE:
-                return "500_free";
+                return "free_500";
             case THOUSAND_FREE:
-                return "1000_free";
+                return "free_1000";
             case SIXTEEN_FIFTY_FREE:
-                return "1650_free";
+                return "free_1650";
             case FIFTY_BACK:
-                return "50_back";
+                return "back_50";
             case HUNDRED_BACK:
-                return "100_back";
+                return "back_100";
             case TWO_HUNDRED_BACK:
-                return "200_back";
+                return "back_200";
             case FIFTY_BREAST:
-                return "50_breast";
+                return "breast_50";
             case HUNDRED_BREAST:
-                return "100_breast";
+                return "breast_100";
             case TWO_HUNDRED_BREAST:
-                return "200_breast";
+                return "breast_200";
             case FIFTY_FLY:
-                return "50_fly";
+                return "fly_50";
             case HUNDRED_FLY:
-                return "100_fly";
+                return "fly_100";
             case TWO_HUNDRED_FLY:
-                return "200_fly";
+                return "fly_200";
             case HUNDRED_IM:
-                return "100_im";
+                return "im_100";
             case TWO_HUNDRED_IM:
-                return "200_im";
+                return "im_200";
             case FOUR_HUNDRED_IM:
-                return "400_im";
+                return "im_400";
             default:
                 throw new IllegalArgumentException("Unexpected event");
         }
