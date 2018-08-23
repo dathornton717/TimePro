@@ -47,7 +47,7 @@
     </build>
 
     <properties>
-        <tomcat.version>7.0.57</tomcat.version>
+        <tomcat.version>8.5.2</tomcat.version>
     </properties>
 
     <dependencies>
@@ -157,6 +157,11 @@
             <artifactId>derbyclient</artifactId>
             <version>10.14.2.0</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.1</version>
+        </dependency>
     </dependencies>
 </project>

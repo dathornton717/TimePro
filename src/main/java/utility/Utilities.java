@@ -2,6 +2,9 @@ package utility;
 
 import event.Event;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class Utilities {
 
     public static Event stringToEvent(String s) {
@@ -45,5 +48,11 @@ public class Utilities {
             default:
                 throw new IllegalArgumentException("Unexpected event");
         }
+    }
+
+    public static String stackTraceToString(Exception e) {
+        StringWriter result = new StringWriter();
+        e.printStackTrace(new PrintWriter(result));
+        return result.toString();
     }
 }
