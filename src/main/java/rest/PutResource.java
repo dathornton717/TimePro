@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import factory.DataSource;
 import factory.Factory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utility.Tuple;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -32,16 +34,11 @@ import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
@@ -62,11 +59,13 @@ import java.util.UUID;
 @Provider
 @Path("/")
 public class PutResource {
+    private static final Logger LOGGER = LogManager.getLogger(PutResource.class.getName());
 
     @PUT
     @Path("add-swimmers")
     public Response addSwimmers(String input)
     throws Exception {
+        LOGGER.info("Adding swimmers");
 
         Map<String, List<String>> teamMap = new HashMap<String, List<String>>();
         String teamName = "";
@@ -98,10 +97,6 @@ public class PutResource {
                 String firstName = swimmer.substring(0, spaceIndex);
                 String lastName = swimmer.substring(spaceIndex + 1);
 
-                System.out.println(firstName);
-                System.out.println(lastName);
-                System.out.println(teamName);
-
                 JsonNodeFactory factory = JsonNodeFactory.instance;
                 ObjectNode node = factory.objectNode();
                 node.put("firstName", firstName);
@@ -123,6 +118,7 @@ public class PutResource {
         String firstName = jsonNode.get("firstName").asText();
         String lastName = jsonNode.get("lastName").asText();
         String teamName = jsonNode.get("teamName").asText();
+        LOGGER.info("Adding swimmer " + firstName + " " + lastName + " on team " + teamName);
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
@@ -134,6 +130,7 @@ public class PutResource {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat calFormat = new SimpleDateFormat("MM/dd/yyyy");
         String presentDate = calFormat.format(calendar.getTime());
+        LOGGER.info("Attempting to get times for swimmer " + firstName + " " + lastName);
 
         driver.get("https://www.usaswimming.org/Home/times/individual-times-search");
         driver.findElementById("UsasTimeSearchIndividual_Index_Div_1FirstName").sendKeys(firstName);
@@ -172,7 +169,7 @@ public class PutResource {
             }
         }
         catch (TimeoutException error) {
-
+            LOGGER.error("Could not find swimmer");
         }
 
         try {
@@ -181,7 +178,7 @@ public class PutResource {
             download.click();
         }
         catch (TimeoutException error) {
-            error.printStackTrace();
+            LOGGER.error("Could not find xml file to download");
         }
 
         Thread.sleep(5000);
