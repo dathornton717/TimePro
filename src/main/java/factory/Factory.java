@@ -1,6 +1,8 @@
 package factory;
 
 import event.Event;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utility.Tuple;
 import utility.Utilities;
 
@@ -15,7 +17,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Factory {
+    private static final Logger LOGGER = LogManager.getLogger(Factory.class.getName());
+
     public Map<Long, Long> getTimesByName(Event event, String firstName, String lastName) throws Exception {
+        LOGGER.info("Getting times for " + firstName + " " + lastName + " for event " + event.eventToTable());
         Map<Long, Long> result = new HashMap<Long, Long>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -65,6 +70,7 @@ public class Factory {
         Long start,
         Long end)
     throws Exception {
+        LOGGER.info("Getting times for " + firstName + " " + lastName + " for event " + event.eventToTable() + " from " + start + " to " + end);
         Map<Long, Long> result = new HashMap<Long, Long>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -113,6 +119,7 @@ public class Factory {
 
     public Map<Long, Long> getTimesToPresentByName(Event event, String firstName, String lastName, Long start)
     throws Exception {
+        LOGGER.info("Getting times for " + firstName + " " + lastName + " for " + event.eventToTable() + " from " + start + " to present");
         Map<Long, Long> result = new HashMap<Long, Long>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -158,6 +165,7 @@ public class Factory {
 
     public Map<Long, Long> getBestTimeByName(Event event, String firstName, String lastName)
     throws Exception {
+        LOGGER.info("Getting best times for " + firstName + " " + lastName + " for " + event.eventToTable());
         Map<Long, Long> times = getTimesByName(event, firstName, lastName);
         List<Long> timeList = new ArrayList<Long>();
         for (Long calendar : times.keySet()) {
@@ -190,6 +198,7 @@ public class Factory {
 
     public Map<Long, Long> getTimesById(Event event, UUID id)
     throws Exception {
+        LOGGER.info("Getting times for id " + id.toString() + " for " + event.eventToTable());
         Map<Long, Long> result = new HashMap<Long, Long>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -232,6 +241,7 @@ public class Factory {
 
     public Map<String, List<String>> getAllNames()
     throws Exception {
+        LOGGER.info("Getting all names from database");
         Map<String, List<String>> result = new HashMap<String, List<String>>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -266,6 +276,7 @@ public class Factory {
 
     public void addSwimmer(String id, Map<String, List<Tuple<Long, Long>>> times)
     throws Exception {
+        LOGGER.info("Adding swimmer with id " + id);
         for (String event : times.keySet()) {
             System.out.println(event);
             List<Tuple<Long, Long>> tupleList = times.get(event);
@@ -275,6 +286,7 @@ public class Factory {
 
     private void addTimesToDatabase(String id, String event, List<Tuple<Long, Long>> tupleList)
         throws Exception {
+        LOGGER.info("Adding times for event " + event + " for id " + id);
         Connection connection = null;
         PreparedStatement statement = null;
             for (Tuple<Long, Long> tuple : tupleList) {
@@ -303,6 +315,7 @@ public class Factory {
 
     private boolean isTimeInDatabase(String id, String event, Long time, Long date)
         throws Exception {
+        LOGGER.info("Checking if time " + time + " for id " + id + " for event " + event + " for date " + date);
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;

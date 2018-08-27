@@ -1,7 +1,6 @@
 target/
 .idea/
-*.iml
-**/*.iml
+TimePro.iml
 out/
 node_modules/
 derby.log

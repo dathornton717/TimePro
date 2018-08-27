@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import event.Event;
 import factory.Factory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utility.Utilities;
 
 import javax.ws.rs.GET;
@@ -21,6 +23,7 @@ import java.util.UUID;
 @Provider
 @Path("/")
 public class GetResource {
+    private static final Logger LOGGER = LogManager.getLogger(GetResource.class.getName());
 
     public GetResource() {}
 
@@ -28,6 +31,7 @@ public class GetResource {
     @Path("update-times")
     public Response updateTimes()
     throws Exception {
+        LOGGER.info("Updating all times");
         Factory factory = new Factory();
         Map<String, List<String>> swimmers = factory.getAllNames();
         JsonNodeFactory jsonNodeFactory = JsonNodeFactory.instance;
@@ -57,6 +61,7 @@ public class GetResource {
         @PathParam("lastName") String lastName,
         @PathParam("event") String eventString)
     throws Exception {
+        LOGGER.info("Getting times for " + firstName + " " + lastName + " for event " + eventString);
         Event event = Utilities.stringToEvent(eventString);
 
         Map<Long, Long> map = new Factory().getTimesByName(event, firstName, lastName);
@@ -75,6 +80,7 @@ public class GetResource {
         @PathParam("start") Long start,
         @PathParam("end") Long end)
     throws Exception {
+        LOGGER.info("Getting time for " + firstName + " " + lastName + " for event " + eventString + " between dates " + start + " and " + end);
         Event event = Utilities.stringToEvent(eventString);
 
         Map<Long, Long> map = new Factory().getTimesBetweenDatesByName(event, firstName, lastName, start, end);
@@ -92,6 +98,7 @@ public class GetResource {
         @PathParam("event") String eventString,
         @PathParam("start") Long start)
     throws Exception {
+        LOGGER.info("Getting time for " + firstName + " " + lastName + " for event " + eventString + " from " + start + " to present");
         Event event = Utilities.stringToEvent(eventString);
 
         Map<Long, Long> map = new Factory().getTimesToPresentByName(event, firstName, lastName, start);
@@ -108,6 +115,7 @@ public class GetResource {
         @PathParam("lastName") String lastName,
         @PathParam("event") String eventString)
     throws Exception {
+        LOGGER.info("Getting best time for " + firstName + " " + lastName + " for event " + eventString);
         Event event = Utilities.stringToEvent(eventString);
 
         Map<Long, Long> map = new Factory().getBestTimeByName(event, firstName, lastName);
@@ -123,6 +131,7 @@ public class GetResource {
         @PathParam("id") String idString,
         @PathParam("event") String eventString)
     throws Exception {
+        LOGGER.info("Getting time for id " + idString + " for event " + eventString);
         Event event = Utilities.stringToEvent(eventString);
         UUID id = UUID.fromString(idString);
 
@@ -137,6 +146,7 @@ public class GetResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllNames()
     throws Exception {
+        LOGGER.info("Getting all swimmer names");
         Map<String, List<String>> names = new Factory().getAllNames();
         ArrayNode result = constructJsonArrayFromNameMap(names);
         return Response.ok().entity(result.toString()).build();
